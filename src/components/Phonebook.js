@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 
-class PhoneBook extends Component{
+class PhoneBook extends Component {
     state = {
+        contacts: [],
         name: '',
         number: ''
     }
@@ -11,23 +12,40 @@ class PhoneBook extends Component{
 
     handleChange = evt => {
         const { name, value } = evt.currentTarget;
-        this.setState({ [name]: value });
+        this.setState({
+            id: shortid.generate(),
+            [name]: value,
+        })
     };
+
     handleSubmit = evt => {
-    evt.preventDefault();
+        evt.preventDefault();
         // console.log(`${this.state}`);
         this.props.onSubmit(this.state);
 
         this.reset();
     };
+
     reset = () => {
-        this.setState({name: '', number: ''})
+        this.setState({ name: '', number: '' })
     }
+
+    addContact = ( name, number ) => {
+        const contact = {
+            id: shortid.generate(),
+            name,
+            number
+        };
+
+        this.setState(prevState => ({
+            contacts: [contact, ...prevState.contacts]
+        }))
+    }
+
     render() {
         const { name, number } = this.state;
         return (
             <div>
-                <h1>PhoneBook</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor={this.nameInputId}>
                         Name
@@ -57,8 +75,6 @@ class PhoneBook extends Component{
                     </label>
                     <button type="submit">Add contact</button>
                 </form>
-                <h2>Contacts</h2>
-                {/* <ul></ul> */}
             </div>
         )
     }
