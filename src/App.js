@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PhoneBook from './components/Phonebook';
 import ContactList from './components/ContactsList';
+import FilterContact from './components/FilterContact';
 
 class App extends Component {
   state = {
@@ -21,21 +22,38 @@ class App extends Component {
       }))
   }
   getContacts = () => {
-    const { filter, contacts } = this.state;
+    const { contacts, filter } = this.state;
     const lowerCase = filter.toLowerCase();
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(lowerCase)
     );
   };
 
- 
-  render (){
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  }
+
+  getVisibleContact = () => {
+    const { filter, contacts } = this.state;
+    
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact => contact.text.toLowerCase().includes(normalizedFilter));
+  }
+  deleteContact = (contactId) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter( contact => contact.id !== contactId)
+    }))
+  }
+  
+  render() {
     return (
       <div>
         <h1>PhoneBook</h1>
         <PhoneBook onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
-        <ContactList contactList={this.getContacts()}/>
+        <FilterContact value={this.state.filter} onChange={this.changeFilter}/>
+        <ContactList contactList={this.getContacts()} onDeleteContact={this.deleteContact}/>
       </div>
     )
   }
