@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
+import styles from './Phonebook.module.css';
 
 class PhoneBook extends Component {
     state = {
@@ -45,10 +46,11 @@ class PhoneBook extends Component {
     render() {
         const { name, number } = this.state;
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor={this.nameInputId}>
+            <div className={styles.section}>
+                <form onSubmit={this.handleSubmit} className={styles.form}>
+                    <label htmlFor={this.nameInputId} className={styles.lable} >
                         Name
+                        <br/>
                         <input
                             type="text"
                             name="name"
@@ -58,10 +60,12 @@ class PhoneBook extends Component {
                             value={name}
                             onChange={this.handleChange}
                             id={this.nameInputId}
+                            className={styles.input}
                         />
                     </label>
-                    <label htmlFor={this.numberInputId}>
+                    <label htmlFor={this.numberInputId} className={styles.lable}>
                         Number
+                        <br/>
                         <input
                             type="tel"
                             name="number"
@@ -71,9 +75,10 @@ class PhoneBook extends Component {
                             value={number}
                             onChange={this.handleChange}
                             id={this.numberInputId}
+                            className={styles.input}
                         />
                     </label>
-                    <button type="submit">Add contact</button>
+                    <button type="submit" className={styles.btn}>Add contact</button>
                 </form>
             </div>
         )
