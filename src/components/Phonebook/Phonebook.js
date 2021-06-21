@@ -31,17 +31,17 @@ class PhoneBook extends Component {
         this.setState({ name: '', number: '' })
     }
 
-    addContact = ( name, number ) => {
-        const contact = {
-            id: shortid.generate(),
-            name,
-            number
-        };
+    // addContact = ( name, number ) => {
+    //     const contact = {
+    //         id: shortid.generate(),
+    //         name,
+    //         number
+    //     };
 
-        this.setState(prevState => ({
-            contacts: [contact, ...prevState.contacts]
-        }))
-    }
+        // this.setState(prevState => ({
+        //     contacts: [contact, ...prevState.contacts]
+        // }))
+    // }
 
     render() {
         const { name, number } = this.state;
