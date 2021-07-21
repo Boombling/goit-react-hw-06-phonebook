@@ -1,5 +1,5 @@
 export default {
-    ADD: 'phoneboock/add',
-    DELETE: 'phoneboock/delete',
-    CHANGE_FILTER: 'phoneboock/changeFilter',
+    ADD: 'phonebook/add',
+    DELETE: 'phonebook/delete',
+    CHANGE_FILTER: 'phonebook/changeFilter',
 };

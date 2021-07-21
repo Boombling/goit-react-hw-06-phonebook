@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import styles from './Phonebook.module.css';
+import { connect } from 'react-redux';
+import phonebookActions from '../redux/phonebook/phonebook-actions'
 
 class PhoneBook extends Component {
     state = {
-        contacts: [],
+        // contacts: [],
         name: '',
         number: ''
     }
@@ -72,5 +74,8 @@ class PhoneBook extends Component {
         )
     }
 }
+const mapDispatchToProps = dispatch => ({
+    onSubmit: ({name, number}) => dispatch(phonebookActions.addContact({name, number}))
+})
 
-export default PhoneBook
+export default connect(null, mapDispatchToProps)(PhoneBook);
